@@ -1,0 +1,16 @@
+
+-- cursors
+Declare @FirstName varchar(20),@LastName varchar(20)
+
+declare Student_Cursor Cursor 
+for select LastName ,FirstName from Students 
+
+open Student_Cursor
+fetch next from Student_Cursor into  @FirstName,@LastName 
+while @@fetch_status=0
+begin 
+print @FirstName+@LastName ;
+fetch next from Student_Cursor into  @FirstName,@LastName 
+end
+close Student_Cursor
+DEALLOCATE Student_Cursor
